@@ -1,16 +1,13 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
 
+$(function () {
 
+  function updateTime() {
+    let todayDate = dayjs()
+    $("#currentDay").text(todayDate.format("dddd MMMM Do h:mm:ss"));
+    let now = dayjs().hour('H')
 
-function updateTime() {
-  let todayDate = dayjs()
-  $("#currentDay").text(todayDate.format("dddd MMMM Do h:mm:ss"));
-  let now = dayjs().hour('H')
-
-    $('.time-block').each(function() {
-      const timeBlock = parseInt(this.id);
+    $('.time-block').each(function () {
+      let timeBlock = parseInt(this.id);
       if (timeBlock == now) {
         $(this).removeClass('past future').addClass('present');
       } else if (timeBlock < now) {
@@ -20,32 +17,23 @@ function updateTime() {
       }
     })
   }
-    function saveText() {
-      $('.saveBtn').on('click', function() {
-        let key = $(this).parent().attr('id');
-        let value = $(this).siblings('.description').val();
-        localStorage.setItem(key, value);
-      });
-    }
-saveText()
+  function saveText() {
+    $('.saveBtn').on('click', function () {
+      let key = $(this).parent().attr('id');
+      let value = $(this).siblings('.description').val();
+      localStorage.setItem(key, value);
+    });
 
-setInterval(updateTime, 1000);
+  }
+  $('.time-block').each(function () {
+    key = $(this).attr('id');
+    value = localStorage.getItem(key);
+    $(this).children('.description').val(value);
+  });
 
-updateTime()
-
-// saveBtn click listener 
-
-
-
-
-
-
-
-
-
-
-$(function () {
-
+  updateTime()
+  setInterval(updateTime, 1000)
+  saveText()
 
 
   // TODO: Add a listener for click events on the save button. This code should
