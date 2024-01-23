@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a simple work day scheduler created with jquery
+This is a simple work day scheduler powered by jquery which uses dayjs to work with date and time.
 
 
 ## Usage
