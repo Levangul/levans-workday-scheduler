@@ -4,6 +4,7 @@ $(function () {
   function updateTime() {
     let todayDate = dayjs()
     $("#currentDay").text(todayDate.format("dddd MMMM D - h:mm:ss"));
+    
     let currentHour = dayjs().format('H')
 
     $('.time-block').each(function () {
